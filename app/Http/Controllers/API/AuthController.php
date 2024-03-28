@@ -43,9 +43,8 @@ class AuthController extends Controller
     {
         try {
             $validateUser = Validator::make($request->all(),
-                [
-                    'phone' => 'required',
-                ]);
+                ['phone' => 'required']
+            );
 
             if ($validateUser->fails()) {
                 return response()->json([
@@ -56,8 +55,10 @@ class AuthController extends Controller
             }
 
             $user = $model::firstOrCreate([
-                'phone' => $request->phone
+                'phone' => $request->phone],[
+                'device_token' => $request->device_token ?? ''
             ]);
+
             $abilities = $model === 'App\Models\User' ? ['guard:users'] : ['guard:employees'];
 
             return response()->json([

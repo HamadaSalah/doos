@@ -6,14 +6,31 @@ use App\Services\UploadService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Car extends Model
 {
     use HasFactory;
     
+
+    /*
+     |--------------------------------------------------------------------------
+     | Relations methods
+     |--------------------------------------------------------------------------
+    */
+
     public function company() {
+
         return $this->belongsTo(Company::class);
+
+    }
+
+    
+    public function rentTypes() {
+
+        return $this->belongsToMany(RentType::class);
+
     }
     
     public function files(): MorphMany

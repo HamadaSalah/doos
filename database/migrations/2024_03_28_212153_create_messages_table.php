@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('return_types', function (Blueprint $table) {
+        Schema::create('messages', function (Blueprint $table) {
             $table->id();
+            $table->string('message');
+            $table->string('from')->nullable();
+            $table->foreignId('room_id')->constrained('rooms')->onDelete('CASCADE');
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('return_types');
+        Schema::dropIfExists('messages');
     }
 };

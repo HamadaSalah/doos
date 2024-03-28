@@ -20,20 +20,15 @@ class UpdateEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'          => 'nullable',
-            'phone'         => 'nullable',
-            'email'         => 'nullable|email',
-            'country'       => 'nullable',
-            'city'          => 'nullable',
-            'description'   => 'nullable|max:100',
-            'password'      => 'nullable',
-            'card_id'       => 'nullable',
-            'licence'       => 'nullable|file:png,jpg,jpeg,svg,webp',
-            'photo'         => 'nullable|file:png,jpg,jpeg,svg,webp',
-            'lat'           => 'nullable',
-            'lng'           => 'nullable',
-            'job_id'           => 'nullable|exists:jobs,id',
-
+            'name'              => 'nullable',
+            'email'             => 'nullable|email',
+            'phone'             => 'nullable',
+            'password'          => 'nullable',
+            'id_number'         => 'nullable|integer',
+            'licence_status'    => 'nullable',
+            'birthday'          => 'nullable',
+            'licence_file'      => 'nullable|file:png,jpg,jpeg,svg,webp,pdf',
+            'id_number_file'    => 'nullable|file:png,jpg,jpeg,svg,webp,pdf',
         ];
     }
 }

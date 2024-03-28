@@ -11,16 +11,24 @@ use App\Models\Calender;
 use App\Models\Car;
 use App\Models\Employee;
 use App\Models\Job;
+use App\Models\Message;
 use App\Models\Rent;
+use App\Models\RentType;
+use App\Models\ReturnType;
+use App\Models\Room;
+use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Slider;
 use App\Models\User;
+use App\Services\UploadService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Number;
+
+use function PHPUnit\Framework\isEmpty;
 
 class APIController extends Controller
 {
@@ -112,8 +120,27 @@ class APIController extends Controller
 
     public function updateProfile(UpdateEmployeeRequest $request)
     {
+        // dd($request->all());
+
         $employee = auth()->user();
+
         $employee->update($request->validated());
+        
+        if($request->hasFile('licence_file')) {
+
+            $employee->update([
+                'licence_file' => UploadService::store($request->licence_file)
+            ]);
+
+        }
+
+        if($request->hasFile('id_number_file')) {
+
+            $employee->update([
+                'id_number_file' => UploadService::store($request->id_number_file)
+            ]);
+
+        }
         $employee->refresh();
 
         return response()->json([
@@ -160,12 +187,24 @@ class APIController extends Controller
 
     
     public function getCars(Request $request) {
-        $cars = Car::with(['company', 'files:id,path,fileable_id'])->latest();
+
+        $cars = Car::with(['company', 'files:id,path,fileable_id', 'rentTypes:id,name,icon'])->latest();
+        
         if($request->driver) {
             $cars->where('with_driver', $request->driver);
         }
+        
+        if($request->rentTypes) {
+            $types = $request->rentTypes;
+            $cars->whereHas('rentTypes', function($q) use ($types) {
+                $q->whereIn('rent_type_id', $types);
+            });
+        }
+        
         return response()->json($cars->get(), 200);
     }
+
+
 
     public function rent(Request $request) {
 
@@ -175,29 +214,90 @@ class APIController extends Controller
             'time' => 'required',
             'location' => 'required',
             'car_id' => 'required',
+            "services" => 'required|exists:services,id|array',
+            "return_type_id" => 'required|exists:return_types,id'
         ]);
 
         $validatedData['user_id'] = auth()->user()->id;
 
+        unset($validatedData['services']);
+
         $rent = Rent::create($validatedData);
 
+        $rent->services()->attach($request->services);
+        
         return response()->json(['message' => 'Rent addedd succesfully', 'data' => $rent], 200);
 
 
     }
 
+
     public function currentRent() {
 
-        $rents = Rent::where('user_id', auth()->user()->id)->whereMonth('created_at', Carbon::now()->month)->get();
+        $rents = Rent::with(['services', 'returnType'])->where('user_id', auth()->user()->id)->whereMonth('created_at', Carbon::now()->month)->get();
 
         return response()->json($rents, 200);
     }
     
     public function lastRent() {
+
         $firstDayOfCurrentMonth = Carbon::now()->startOfMonth();
 
          $rents = Rent::where('user_id', auth()->user()->id)->where('created_at', '<', $firstDayOfCurrentMonth)->get();
 
         return response()->json($rents, 200);
+    }
+
+
+
+    public function rentTypes() {
+
+         $rents = RentType::get();
+
+        return response()->json($rents, 200);
+    }
+
+    public function returnType() {
+
+        return response()->json(ReturnType::all(), 200);
+        
+    }
+
+    public function services() {
+
+        return response()->json(Service::all(), 200);
+        
+    }
+
+    public function sendMessage(Request $request) {
+
+        $request->validate([
+            'message' => 'required|max:191'
+        ]);
+
+        $room = Room::where(['user_id' => auth()->user()->id])->first();
+
+         if($room == NULL) {
+            $room = Room::create([
+                'user_id' => auth()->user()->id
+            ]);
+         }
+
+
+        $room->messages()->create([
+            'message' => $request->message,
+            'from' => 'user',
+        ]);
+
+        return response()->json(['message' => 'message Sent Successfully'], 200);
+
+    }
+
+    public function messages() {
+
+        $room = Room::where(['user_id' => auth()->user()->id])->first();
+
+        return response()->json(["messages" => $room?->messages ?? []], 200);
+
     }
 }
