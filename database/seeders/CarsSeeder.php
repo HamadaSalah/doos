@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Admin;
 use App\Models\Car;
 use App\Models\Company;
 use App\Models\Recepeit;
@@ -13,6 +14,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
+use Illuminate\Support\Facades\Hash;
 
 class CarsSeeder extends Seeder
 {
@@ -22,6 +24,11 @@ class CarsSeeder extends Seeder
     public function run(): void
     {
 
+        Admin::create([
+            'name' => 'doos',
+            'email' => 'doos@doos.com',
+            'password' => Hash::make('doos123')
+        ]);
         //companies
         Company::create([
             'name' => 'العالمي لتاجير السيارات',

@@ -1,0 +1,85 @@
+.nav-link-text{
+    font-size: 19px;
+    color: #fff;
+}
+.navbar-vertical .navbar-brand .navbar-brand-img, .navbar-vertical .navbar-brand span {
+    color: #fff;
+}
+.f-bold {
+    font-weight: bold!important;
+}
+.navbar-vertical.navbar-expand-xs .navbar-collapse {
+    height: 500px!important;
+}
+.sidenav {
+    background-color: #ff6600;
+}
+.pagination {
+    display: inline-flex;
+    margin-top: 30px;
+}
+
+
+
+
+.text-uppercase.text-secondary.text-xxs.font-weight-bolder {
+    color:#000!important;
+    font-size: 14px!important;
+    font-weight: bold;
+}
+
+.text-xs.text-secondary {
+    color:#333!important;
+    font-size: 13px!important;
+    font-weight: bold;
+
+}
+
+
+
+.raduisadata{
+    background: #f8f9fa;
+    padding: 11px;
+    border-radius: 25px;
+    padding-right: 10px;
+    border: 1px dashed #ccc;
+}
+.mycardata label {
+    font-weight: bold;
+    font-size: 15px;
+    margin-bottom: 10px;
+}
+.spandata {
+    background: #f60;
+    color: #fff;
+    margin: 0;
+    border-radius: 15px;
+    padding: 5px 10px;
+    display: inline-table;
+}
+
+.nav{
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.nav-tabs {
+    border-bottom: 0;
+}
+
+.nav-tabs .nav-link {
+    border-bottom: 0;
+    border: 0;
+    border-radius: 5px!important;
+    font-size: 20px;
+    padding: 20px 40px!important;
+
+}
+.nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+    /* border: 0; */
+    background: #f60;
+     border-radius: 5px;
+    color: #fff;
+    font-size: 20px;
+    padding: 20px; */
+}

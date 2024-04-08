@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Car extends Model
 {
@@ -32,8 +33,24 @@ class Car extends Model
         return $this->belongsToMany(RentType::class);
 
     }
+
+    public function maintains() {
+
+        return $this->hasMany(Maintain::class)->latest();
+
+    }
     
     public function files(): MorphMany
+    {
+        return $this->morphMany(File::class, 'fileable');
+    }
+
+    public function firstFile(): MorphOne
+    {
+        return $this->morphOne(File::class, 'fileable')->orderBy('created_at', 'asc');
+    }
+
+    public function file(): MorphMany
     {
         return $this->morphMany(File::class, 'fileable');
     }
@@ -65,8 +82,8 @@ class Car extends Model
 
     public function getStatusAttribute($value) 
     {
-        if($value == '0') {
-            return 'متاحة ';
+        if($value == 0) {
+            return 'متاحة';
         }
         
         return 'غير متاحة';
