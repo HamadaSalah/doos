@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\BranchesController;
 use App\Http\Controllers\Admin\CarsController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\RentController;
+use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -30,6 +32,15 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
     Route::post('/cars/delete', [CarsController::class, 'delete'])->name('cars.delete');
     Route::post('/maintain', [CarsController::class, 'maintainStore'])->name('maintain.store');
     Route::get('/maintain/{maintain}', [CarsController::class, 'maintainDelete'])->name('maintain.delete');
+
+    //Users
+    Route::resource('users', UsersController::class);
+    Route::post('/users/delete', [UsersController::class, 'delete'])->name('users.delete');
+
+
+    //Rents
+    Route::resource('rents', RentController::class);
+    Route::post('/rents/delete', [RentController::class, 'delete'])->name('rents.delete');
 
 
 });

@@ -7,13 +7,14 @@ namespace App\Models;
 use App\Services\UploadService;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -25,6 +26,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'photo',
         'id_number',
         'licence_status',
         'licence_file',
@@ -58,6 +60,10 @@ class User extends Authenticatable
         return  env('APP_URL') . '/storage/' . $value;
     }
     public function getIdNumberFileAttribute($value)
+    {
+        return  env('APP_URL') . '/storage/' . $value;
+    }
+    public function getPhotoAttribute($value)
     {
         return  env('APP_URL') . '/storage/' . $value;
     }

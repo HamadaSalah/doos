@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('message');
             $table->string('from')->nullable();
             $table->foreignId('room_id')->constrained('rooms')->onDelete('CASCADE');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

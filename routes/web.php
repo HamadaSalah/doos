@@ -1,6 +1,8 @@
 <?php
 
+use App\Models\CarBrand;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,3 +24,15 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('testt', function(){
+
+    $response = Http::get('https://private-anon-75524369b4-carsapi1.apiary-mock.com/manufacturers');
+    $manufacturers = $response->json();
+
+    foreach ($manufacturers as $manufacturer) {
+        
+        CarBrand::create(['name' => $manufacturer['name']]);
+
+    }
+
+});

@@ -9,16 +9,26 @@
         <form method="POST" action="{{Route('admin.cars.store')}}" enctype="multipart/form-data">
             @csrf
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>نوع السيارة</label>
                         <input name="type" type="text" class="form-control">
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label>موديل السيارة</label>
                         <input name="model" type="text" class="form-control">
+                    </div>        
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>الفرع</label>
+                        <select class="form-select" name="branch_id" aria-label="Default select example" style="padding-right: 30px">
+                            @foreach ($branches as $branch)
+                                <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                            @endforeach
+                        </select>
                     </div>        
                 </div>
             </div>
@@ -83,12 +93,27 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <label>الحالة</label>
+                        <select name="status" class="form-select" aria-label="Default select example" style="padding-right: 30px">
+                            <option value="1">متاحة</option>
+                            <option value="0">غير متاحة الان </option>
+                        </select>
+                    </div>        
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
                         <label>نوع الاستئجار</label>
                         <select class="form-select" name="rents[]" aria-label="Default select example" style="overflow: auto;height: 100px;" multiple>
                             @foreach ($rentTypes as $rent)
                                 <option value="{{ $rent->id }}">{{ $rent->name }}</option>
                             @endforeach
                         </select>
+                    </div>        
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>الصور</label>
+                        <input type="file" name="img[]" id="" class=" form-control" multiple>
                     </div>        
                 </div>
             </div>

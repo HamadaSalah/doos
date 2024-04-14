@@ -12,7 +12,7 @@
     height: 500px!important;
 }
 .sidenav {
-    background-color: #ff6600;
+    background-color: #ff6600!important;
 }
 .pagination {
     display: inline-flex;
@@ -36,13 +36,17 @@
 }
 
 
-
+select::-webkit-scrollbar {
+    display: none;
+  }
+  
 .raduisadata{
     background: #f8f9fa;
     padding: 11px;
     border-radius: 25px;
     padding-right: 10px;
     border: 1px dashed #ccc;
+    text-align: center;
 }
 .mycardata label {
     font-weight: bold;
@@ -56,6 +60,7 @@
     border-radius: 15px;
     padding: 5px 10px;
     display: inline-table;
+    margin-bottom: 5px;
 }
 
 .nav{

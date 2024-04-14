@@ -5,10 +5,11 @@ namespace App\Models;
 use App\Enums\RentLocationEnum;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Rent extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
     
     protected $guarded = [];
 
@@ -20,9 +21,13 @@ class Rent extends Model
     }
 
     public function services() {
-
         return $this->belongsToMany(Service::class);
-        
+    }
+    public function car() {
+        return $this->belongsTo(Car::class);
+    }
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 
     

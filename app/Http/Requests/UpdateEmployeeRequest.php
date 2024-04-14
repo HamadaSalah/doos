@@ -29,6 +29,7 @@ class UpdateEmployeeRequest extends FormRequest
             'birthday'          => 'nullable',
             'licence_file'      => 'nullable|file:png,jpg,jpeg,svg,webp,pdf',
             'id_number_file'    => 'nullable|file:png,jpg,jpeg,svg,webp,pdf',
+            'photo'    => 'nullable|file:png,jpg,jpeg,svg,webp,pdf',
         ];
     }
 }

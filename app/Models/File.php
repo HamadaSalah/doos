@@ -13,6 +13,7 @@ use Illuminate\Support\Env;
 class File extends Model
 {
  
+    use SoftDeletes;
     public bool $inPermission = true;
 
     protected $fillable = ['path', 'fileable_id', 'fileable_type'];
@@ -34,7 +35,7 @@ class File extends Model
     public function path(): Attribute
     {
         return Attribute::make(
-            get: fn($value) => env('APP_URL').'/'.$value,
+            get: fn($value) => env('APP_URL').'/storage/'.$value,
 //            set: fn($value) => !empty($value) ? UploadService::store($value) : $this->path
         );
     }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->foreignId('car_id')->nullable()->constrained('cars')->onDelete('CASCADE');
             $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('CASCADE');
             $table->foreignId('return_type_id')->nullable()->constrained('return_types')->onDelete('CASCADE');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

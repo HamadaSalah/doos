@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\CarBrand;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,5 +22,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Paginator::useBootstrap(); // For Bootstrap 5    
+
+        view()->composer('Admin.Cars.all-cars-model', function($view){
+            $view->with('brands' , CarBrand::all());
+        });
     }
 }

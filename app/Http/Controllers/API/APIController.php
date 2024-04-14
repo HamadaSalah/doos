@@ -141,6 +141,14 @@ class APIController extends Controller
             ]);
 
         }
+        
+        if($request->hasFile('photo')) {
+
+            $employee->update([
+                'photo' => UploadService::store($request->photo)
+            ]);
+
+        }
         $employee->refresh();
 
         return response()->json([

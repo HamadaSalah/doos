@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('with_driver')->nullable();
             $table->string('status')->nullable();
             $table->foreignId('company_id')->nullable()->constrained('companies')->onDelete('CASCADE');
+            $table->foreignId('branch_id')->nullable()->constrained('branches')->onDelete('CASCADE');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

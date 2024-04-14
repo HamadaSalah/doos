@@ -5,8 +5,42 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
+            @csrf
             <h6 style="float: right">كل السيارات</h6>
-            <a style="float: left" href="{{route('admin.cars.create')}}"><button class="btn btn-success">اضافة سيارة</button></a>   
+            <a style="float: left" href="{{route('admin.cars.create')}}"><button class="btn btn-success">اضافة سيارة</button></a> 
+            <form action="{{ route('admin.cars.index') }}" method="GET">
+            <div class="row" style="clear: both;border: 1px dashed #ccc;padding: 20px;margin-bottom: 30px">
+              <div class="col-md-3" style="float: right">
+                @include('Admin.Cars.all-cars-model')  
+              </div>
+              <div class="col-md-3" style="float: right">
+                <div class="" style="display:block; clear:both">
+                  <label for="">الفروع</label>
+                  <select id="carManufacturer" class="form-control" name="branch_id">
+                    <option value="">اختر افرع</option>
+                    @foreach ($branches as $branch)
+                      <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                    @endforeach
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3" style="float: right">
+                <div class="" style="display:block; clear:both">
+                  <label for="">الحالة</label>
+                  <select id="carManufacturer" class="form-control" name="status">
+                    <option value="">اختر الحالة</option>
+                    <option value="0">متاحة</option>
+                    <option value="1">غير متاحة</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label for=""></label>
+                  <button class="btn btn-success form-control mt-1" width="100%" type="submit">فلترة</button>
+              </div>
+            </div>
+          </form>
+
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -56,7 +90,7 @@
                           <td>
                             <div class="d-flex px-2 py-1">
                                 <div class="d-flex flex-column justify-content-center">
-                                <img src="{{ $car->firstFile->path}}" width="150px" height="120px" alt="">
+                                <img src="{{ $car->firstFile?->path}}" width="150px"  height="120px" alt="">
                                 </div>
                             </div>
                         </td>

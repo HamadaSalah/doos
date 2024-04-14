@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
+use App\Models\Branch;
 use App\Models\Car;
 use App\Models\Company;
 use App\Models\Recepeit;
@@ -33,6 +34,9 @@ class CarsSeeder extends Seeder
         Company::create([
             'name' => 'العالمي لتاجير السيارات',
             'img'  => 'company1.png'
+        ]);
+        Branch::create([
+            'name' => 'فرع الدمام',
         ]);
 
         //renttypes
@@ -116,6 +120,7 @@ class CarsSeeder extends Seeder
                 'with_driver' => $faker->numberBetween(0, 1),
                 'status' => '0',
                 'company_id' => 1,
+                'branch_id' => 1
             ]);
 
             $car->rentTypes()->attach($rent1);

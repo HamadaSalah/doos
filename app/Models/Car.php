@@ -9,12 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Car extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
+    protected $fillable = ['type', 'model', 'year', 'price', 'assurance', 'number', 'licence_file', 'kilos', 'with_driver', 'status', 'company_id', 'branch_id'];
     
-
     /*
      |--------------------------------------------------------------------------
      | Relations methods
@@ -95,5 +96,6 @@ class Car extends Model
         return  "كيلومتر  / اليوم ". $value  ;
         
     }
+ 
 
 }

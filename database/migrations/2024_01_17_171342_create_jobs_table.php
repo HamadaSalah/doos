@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('job_name')->nullable();
             $table->string('img')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

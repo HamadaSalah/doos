@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('status')->nullable()->default(0);
             $table->foreignId('car_id')->constrained('cars')->onDelete('CASCADE');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

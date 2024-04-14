@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('icon')->default('default-icon.png')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
