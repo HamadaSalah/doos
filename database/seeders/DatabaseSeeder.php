@@ -17,10 +17,10 @@ class DatabaseSeeder extends Seeder
 
         $this->call(CarsSeeder::class);
         $this->call(AboutSeeder::class);
-        $this->call(CarsSeeder::class);
+        $this->call(BannerSeeder::class);
         $this->call(NotificationSeeder::class);
         $this->call(Transaction::class);
-        
+
         // $this->call(CategorySeeder::class);
         // $this->call(EmployeeSeeder::class);
         // \App\Models\User::factory(10)->create();
