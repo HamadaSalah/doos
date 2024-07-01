@@ -11,6 +11,7 @@ use App\Models\RentType;
 use App\Models\ReturnPolicy;
 use App\Models\ReturnType;
 use App\Models\Service;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -28,6 +29,13 @@ class CarsSeeder extends Seeder
         Admin::create([
             'name' => 'doos',
             'email' => 'doos@doos.com',
+            'password' => Hash::make('doos123')
+        ]);
+
+        User::create([
+            'name' => 'Hamada Salah',
+            'email' => 'emaisl@email.com',
+            'phone' => '+201124928780',
             'password' => Hash::make('doos123')
         ]);
         //companies
