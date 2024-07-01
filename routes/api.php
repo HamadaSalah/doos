@@ -39,6 +39,12 @@ Route::group(['middleware' => ['auth:users']], function() {
     Route::get('employees/{employee}', [APIController::class, 'employee']);
     Route::get('add-rate/{employee}', [APIController::class, 'addRate']);
     Route::post('add-appointment/{employee}', [APIController::class, 'AddAppointment']);
+    Route::get('profile', [APIController::class, 'profileData']);
+    Route::get('banners', [APIController::class, 'bannersData']);
+    Route::get('notification', [APIController::class, 'notificationData']);
+    Route::get('transactions', [APIController::class, 'transactionsData']);
+    Route::get('about', [APIController::class, 'aboutData']);
+
 });
 
 Route::group(['middleware' => ['auth:employees'], 'prefix' => 'employee' ], function() {
@@ -46,5 +52,6 @@ Route::group(['middleware' => ['auth:employees'], 'prefix' => 'employee' ], func
     Route::post('add-portfolio', [APIController::class, 'addPortfolio']);
     Route::get('calenders', [APIController::class, 'calenders']);
     Route::get('calenders/{calender}', [APIController::class, 'getCalenders']);
+
 });
 

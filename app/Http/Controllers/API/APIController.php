@@ -7,11 +7,14 @@ use App\Http\Requests\AddPortfolioEmployeeRequest;
 use App\Http\Requests\AppointmentRequest;
 use App\Http\Requests\RateRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use App\Models\About;
+use App\Models\Banner;
 use App\Models\Calender;
 use App\Models\Car;
 use App\Models\Employee;
 use App\Models\Job;
 use App\Models\Message;
+use App\Models\Notification;
 use App\Models\Rent;
 use App\Models\RentType;
 use App\Models\ReturnType;
@@ -19,6 +22,7 @@ use App\Models\Room;
 use App\Models\Service;
 use App\Models\Setting;
 use App\Models\Slider;
+use App\Models\Transaction;
 use App\Models\User;
 use App\Services\UploadService;
 use Carbon\Carbon;
@@ -307,5 +311,33 @@ class APIController extends Controller
 
         return response()->json(["messages" => $room?->messages ?? []], 200);
 
+    }
+
+    public function profileData() {
+
+        return response()->json(auth()->user(), 200);
+        
+    }
+    public function bannersData() {
+
+        return response()->json(Banner::latest()->get(), 200);
+        
+    }
+    
+    public function notificationData() {
+
+        return response()->json(Notification::where('user_id', auth()->user()->id)->get(), 200);
+        
+    }
+
+    public function transactionsData() {
+
+        return response()->json(Transaction::where('user_id', auth()->user()->id)->get(), 200);
+        
+    }
+    public function aboutData() {
+
+        return response()->json(About::first(), 200);
+        
     }
 }
