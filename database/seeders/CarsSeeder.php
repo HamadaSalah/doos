@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\Branch;
 use App\Models\Car;
 use App\Models\Company;
+use App\Models\ReceiveType;
 use App\Models\Recepeit;
 use App\Models\RentType;
 use App\Models\ReturnPolicy;
@@ -95,6 +96,13 @@ class CarsSeeder extends Seeder
         ]);
 
 
+        ReceiveType::create([
+            'name' => 'الي المنزل',
+        ]);
+        ReceiveType::create([
+            'name' => 'استلام من الفرع',
+        ]);
+        
         ///
         $faker = Faker::create();
 

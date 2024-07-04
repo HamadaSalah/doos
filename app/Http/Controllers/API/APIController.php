@@ -15,6 +15,7 @@ use App\Models\Employee;
 use App\Models\Job;
 use App\Models\Message;
 use App\Models\Notification;
+use App\Models\ReceiveType;
 use App\Models\Rent;
 use App\Models\RentType;
 use App\Models\ReturnType;
@@ -246,7 +247,7 @@ class APIController extends Controller
 
     public function currentRent() {
 
-        $rents = Rent::with(['services', 'returnType'])->where('user_id', auth()->user()->id)->whereMonth('created_at', Carbon::now()->month)->get();
+        $rents = Rent::with(['services', 'returnType', 'car'])->where('user_id', auth()->user()->id)->whereMonth('created_at', Carbon::now()->month)->get();
 
         return response()->json($rents, 200);
     }
@@ -255,7 +256,7 @@ class APIController extends Controller
 
         $firstDayOfCurrentMonth = Carbon::now()->startOfMonth();
 
-         $rents = Rent::where('user_id', auth()->user()->id)->where('created_at', '<', $firstDayOfCurrentMonth)->get();
+         $rents = Rent::with('car')->where('user_id', auth()->user()->id)->where('created_at', '<', $firstDayOfCurrentMonth)->get();
 
         return response()->json($rents, 200);
     }
@@ -339,5 +340,9 @@ class APIController extends Controller
 
         return response()->json(About::first(), 200);
         
+    }
+    public function ReceiveTypes() {
+        return response()->json(ReceiveType::all(), 200);
+
     }
 }

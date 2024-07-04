@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth:users']], function() {
     Route::get('/services', [APIController::class, 'services']);
     Route::post('/send-message', [APIController::class, 'sendMessage']);
     Route::get('/messages', [APIController::class, 'messages']);
+    Route::get('/receive-types', [APIController::class, 'ReceiveTypes']);
 
     Route::get('intro', [APIController::class, 'intro']);
     Route::get('employees', [APIController::class, 'listEmployees']);
