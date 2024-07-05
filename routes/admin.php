@@ -3,7 +3,10 @@
 use App\Http\Controllers\Admin\BranchesController;
 use App\Http\Controllers\Admin\CarsController;
 use App\Http\Controllers\Admin\LoginController;
+use App\Http\Controllers\Admin\ReceiveTypeController;
 use App\Http\Controllers\Admin\RentController;
+use App\Http\Controllers\Admin\RentTypeController;
+use App\Http\Controllers\Admin\ReturnTypeController;
 use App\Http\Controllers\Admin\UsersController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +29,15 @@ Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function
 
     Route::resource('branches', BranchesController::class);
     Route::post('/branches/delete', [BranchesController::class, 'delete'])->name('branches.delete');
+
+    Route::resource('ReturnType', ReturnTypeController::class);
+    Route::post('/ReturnType/delete', [ReturnTypeController::class, 'delete'])->name('ReturnType.delete');
+
+    Route::resource('RentType', RentTypeController::class);
+    Route::post('/RentType/delete', [RentTypeController::class, 'delete'])->name('RentType.delete');
+
+    Route::resource('ReceiveType', ReceiveTypeController::class);
+    Route::post('/ReceiveType/delete', [ReceiveTypeController::class, 'delete'])->name('ReceiveType.delete');
 
     //cars routes
     Route::resource('cars', CarsController::class);

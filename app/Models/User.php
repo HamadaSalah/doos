@@ -31,7 +31,8 @@ class User extends Authenticatable
         'licence_status',
         'licence_file',
         'id_number_file',
-        'birthday'
+        'birthday',
+        'otp'
     ];
 
     /**
@@ -68,5 +69,10 @@ class User extends Authenticatable
         return  env('APP_URL') . '/storage/' . $value;
     }
     
+
+    public function rents() {
+        return $this->hasMany(Rent::class);
+    }
+
 
 }

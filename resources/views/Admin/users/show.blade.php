@@ -51,24 +51,84 @@
                         <div class="mycardata">
                             <label for="">الصورة</label>
                             
-                            <div class="raduisadata"><img   height="200px" style="border-radius: 25px;text-align: center;margin: auto" src="{{asset($user->photo)}}" alt=""></div>
+                            <div class="raduisadata"><img   height="200px" width="350px" style="border-radius: 25px;text-align: center;margin: auto" src="{{asset($user->photo)}}" alt=""></div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <div class="mycardata">
                             <label for="">صورة الرخصة</label>
-                            <div class="raduisadata"><img height="200px" style="border-radius: 25px;text-align: center;margin: auto" src="{{asset($user->licence_file)}}" alt=""></div>
+                            <div class="raduisadata"><img height="200px" width="350px" style="border-radius: 25px;text-align: center;margin: auto" src="{{asset($user->licence_file)}}" alt=""></div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3">
                         <div class="mycardata">
                             <label for="">صورة الــ id</label>
-                            <div class="raduisadata"><img height="200px" style="border-radius: 25px;text-align: center;margin: auto" src="{{asset($user->id_number_file)}}" alt=""></div>
+                            <div class="raduisadata"><img height="200px" width="350px" style="border-radius: 25px;text-align: center;margin: auto" src="{{asset($user->id_number_file)}}" alt=""></div>
                         </div>
                     </div>
                 </div>        
             </div>
-            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
+            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                <table class="table align-items-center mb-0">
+                    <thead>
+                      <tr>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">#</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">السيارة</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">العميل</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">من</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">الي</th>
+                        <th class="text-secondary"></th> 
+                      </tr>
+                    </thead>
+                    <tbody>
+    
+                @foreach ($user->rents as $rent)
+                <tr>
+                    <td>
+                        <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                            <p class="text-xs text-secondary mb-0">{{ $rent->id }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                            <p class="text-xs text-secondary mb-0">{{ $rent->car?->type }} - {{ $rent->car?->model }} - {{ $rent->car?->year }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="d-flex px-2 py-1">
+                            <div class="d-flex flex-column justify-content-center">
+                            <p class="text-xs text-secondary mb-0">{{ $rent->user?->name }}</p>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                      <div class="d-flex px-2 py-1">
+                          <div class="d-flex flex-column justify-content-center">
+                          <p class="text-xs text-secondary mb-0">{{ $rent->date_from}}</p>
+                          </div>
+                      </div>
+                  </td>
+                  <td>
+                    <div class="d-flex px-2 py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                        <p class="text-xs text-secondary mb-0">{{ $rent->date_to}}</p>
+                        </div>
+                    </div>
+                </td>
+              <td class="align-middle">
+                        <a href="{{route('admin.rents.edit', $rent->id)}}"><button class="btn btn-primary">تعديل </button></a>
+                        <a href="{{route('admin.rents.show', $rent->id)}}"><button class="btn btn-secondary">تفاصيل </button></a>
+                        <button class="btn btn-danger DeleteMod" data-bs-toggle="modal" data-bs-target="#deleteModal" data-id="{{$rent->id}}">حذف</button>
+                    </td>
+                </tr>
+            @endforeach
+                    </tbody>
+                </table>
+            </div>
           </div>
           
 

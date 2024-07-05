@@ -112,55 +112,90 @@
                 </div>
         
             </div>
-            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">...</div>
-            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-                <button class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#addMainTain"> اضافة  <i class="fa fa-plus"> </i>  </button>
-
-                @if (count($rent->car->maintains) > 0)
-                    <div class="table-responsive p-0">
-
-                    <table class="table align-items-center mb-0">
-                      <thead>
-                        <tr>
-                          <th class="text-uppercase text-center font-weight-bolder ">#</th>
-                          <th class="text-uppercase text-center font-weight-bolder  ps-2">التكلفة</th>
-                          <th class="text-center text-uppercase font-weight-bolder ">التاريخ</th>
-                          <th class="text-center text-uppercase font-weight-bolder ">التفاصيل</th>
-                          <th class="text-secondary ">اجراء</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        @foreach ($rent->car->maintains as $main)
-                            <tr>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0 text-center">{{$main->id}}</p>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0 text-center">{{$main->amount}}</p>
-                            </td>
-                            <td class="align-middle text-center">
-                                <span class="text-secondary text-xs font-weight-bold text-center">{{$main->date}}</span>
-                            </td>
-                            <td>
-                                <p class="text-xs font-weight-bold mb-0 text-center">{{$main->description}}</p>
-                            </td>
-
-                            <td class="align-middle">
-                              <a href="{{route('admin.maintain.delete', $main->id)}}"> <button class="btn btn-danger">حذف</button></a>
-                            </td>
-                            </tr>                            
-                        @endforeach
-                      </tbody>
-                    </table>
-                </div>
-                @else
-                        <center>
-                            لا يوجد
-                        </center>
-                @endif
+            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
                 
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="mycardata">
+                            <label for="">من تاريخ</label>
+                            <div class="raduisadata">{{ $rent->date_from }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="mycardata">
+                            <label for="">الي تاريخ</label>
+                            <div class="raduisadata">{{ $rent->date_to }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="mycardata">
+                            <label for="">الوقت</label>
+                            <div class="raduisadata">{{ $rent->time }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="mycardata">
+                            <label for="">طريقة الارجاع</label>
+                            <div class="raduisadata">{{ $rent->returnType->name }}</div>
+                        </div>
+                    </div>
+
+                </div>
 
 
+            </div>
+            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <div class="mycardata">
+                            <label for="">الاسم</label>
+                            <div class="raduisadata">{{  $rent->user->name }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="mycardata">
+                            <label for="">البريد</label>
+                            <div class="raduisadata">{{  $rent->user->email }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="mycardata">
+                            <label for="">الموبايل</label>
+                            <div class="raduisadata">{{  $rent->user->phone }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="mycardata">
+                            <label for="">تاريخ الميلاد</label>
+                            <div class="raduisadata">{{  $rent->user->birthday }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <div class="mycardata">
+                            <label for="">حالة الرخصة</label>
+                            <div class="raduisadata">{{  $rent->user->licence_status==1 ? 'سارية' : 'منتهية' }}</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="mycardata">
+                            <label for="">الصورة</label>
+                            
+                            <div class="raduisadata"><img   height="200px" width="300px" style="border-radius: 25px;text-align: center;margin: auto" src="{{asset( $rent->user->photo)}}" alt=""></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="mycardata">
+                            <label for="">صورة الرخصة</label>
+                            <div class="raduisadata"><img height="200px" width="300px" style="border-radius: 25px;text-align: center;margin: auto" src="{{asset( $rent->user->licence_file)}}" alt=""></div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <div class="mycardata">
+                            <label for="">صورة الــ id</label>
+                            <div class="raduisadata"><img height="200px" width="300px" style="border-radius: 25px;text-align: center;margin: auto" src="{{asset( $rent->user->id_number_file)}}" alt=""></div>
+                        </div>
+                    </div>
+                </div>     
             </div>
             <div class="tab-pane fade" id="disabled-tab-pane" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">...</div>
           </div>

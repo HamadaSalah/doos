@@ -3,7 +3,7 @@
 <div class="container mt-5">
     <div class="card stacked-form">
     <div class="card-header ">
-        <h4 class="card-title f-bold">اضافة سيارة جديدة</h4>
+        <h4 class="card-title f-bold">اضافة  عقد جديد</h4>
     </div>
     <div class="card-body">
         <form method="POST" action="{{Route('admin.rents.store')}}" enctype="multipart/form-data">
@@ -26,7 +26,7 @@
                         <select name="user_id" class="form-select" aria-label="Default select example" style="padding-right: 30px " required>
                             <option value="">اختر العميل </option>
                             @foreach ($users as $user)
-                                <option value="{{ $user->id }}">{{ $user->name }} </option>
+                                <option style="direction: ltr" value="{{ $user->id }}">{{ $user->name }} ( {{ $user->phone }} ) </option>
                             @endforeach
                         </select>
                     </div>
@@ -78,7 +78,6 @@
                     <div class="form-group">
                         <label>طريقة الارجاع</label>
                         <select name="return_type_id" class="form-select" aria-label="Default select example" style="padding-right: 30px " required>
-                            <option value="">طريقة الارجاع </option>
                             @foreach ($rent_types as $re)
                                 <option value="{{ $re->id }}">{{ $re->name }} </option>
                             @endforeach

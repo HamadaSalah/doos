@@ -27,6 +27,10 @@ class RentType extends Model
         
     }
 
+    public function getIconAttribute($value) 
+    {
+        return env('APP_URL').'/storage/'.$value;
+    }
 
 
 

@@ -18,6 +18,8 @@ use App\Http\Controllers\API\AuthController;
 //Registration for
 Route::post('/auth/register', [AuthController::class, 'userRegister']);
 Route::post('employee/auth/register', [AuthController::class, 'employeeRegister']);
+Route::post('/matchOTP', [AuthController::class, 'matchOTP']);
+Route::post('employee/matchOTP', [AuthController::class, 'employeeMatchOTP']);
 
 Route::group(['middleware' => ['auth:users']], function() {
 

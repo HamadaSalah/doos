@@ -67,6 +67,7 @@ class UsersController extends Controller
      */
     public function show(User $user)
     {
+        $user->load('rents');
         return view('Admin.users.show', ['user' => $user]);
     }
 

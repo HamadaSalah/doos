@@ -75,7 +75,7 @@ class RentController extends Controller
      */
     public function show(Rent $rent)
     {
-        $rent->load(['car', 'car.files:id,path,fileable_id', 'returnType:id,name']);
+        $rent->load(['car', 'car.files:id,path,fileable_id', 'returnType:id,name', 'user']);
 
         return view('Admin.Rents.show', ['rent' => $rent]);
     }
