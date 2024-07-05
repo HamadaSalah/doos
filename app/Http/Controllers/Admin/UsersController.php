@@ -15,7 +15,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        return view('Admin.Users.index', [
+        return view('Admin.user.index', [
             'users' => User::latest()->paginate(10)
         ]);
     }
@@ -25,7 +25,7 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('Admin.Users.create');
+        return view('Admin.user.create');
 
     }
 
