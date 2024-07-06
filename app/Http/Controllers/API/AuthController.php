@@ -88,7 +88,8 @@ class AuthController extends Controller
 
     public function sendOTP($code, $phone)  {
 
-        $phone  = substr($phone, 1);  
+        $phone = str_replace(" ", "", $phone);
+        $phone = str_replace("+", "", $phone);
 
         $client = new Client();
         // Specify the URL for the POST request
