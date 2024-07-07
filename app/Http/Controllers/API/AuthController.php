@@ -75,6 +75,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => true,
                 'message' => 'OTP Sent Successfully',
+                'code ' => $code,
                 // 'token' => $user->createToken("API TOKEN", $abilities)->plainTextToken
             ], 200);
 
@@ -136,7 +137,8 @@ class AuthController extends Controller
                 return response()->json([
                     'status' => true,
                     'message' => 'Login Successfully',
-                    'token' => $user->createToken("API TOKEN", $abilities)->plainTextToken
+                    'token' => $user->createToken("API TOKEN", $abilities)->plainTextToken,
+                    'user' => $user
                 ], 200);
             } else {
                 return response()->json([
