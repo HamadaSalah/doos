@@ -4,8 +4,7 @@
   <div class="row">
     <h3 class="mt-3">خريطة السيارات التفاعلية</h3>
     <div class="col-md-12 mt-3" style="padding: 0 ">
-      <iframe  width="100%" height="600" style="border:2px dashed #ff6600;margin-bottom:30px" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d13818.708014128471!2d31.18546202753905!3d30.01742958110304!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2seg!4v1713118056932!5m2!1sen!2seg"></iframe>
-  
+      <div id="map" style="width: 100%;height:600px"></div>
     </div>
   
   </div>
@@ -236,6 +235,52 @@
       </div>
     </div>
   </div>
+  @dump($cars)
+  @push('scripts')
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBia4FwnhpyeHcNlWHM7WSjM4mlJAd3peQ&callback=initMap" async defer></script>
+
+  <script>
+    // Example car data array
+    const cars = @json($cars);
+
+    // Initialize and add the map
+    function initMap() {
+        // The map, centered at a default location
+        const map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: { lat: 24.714089198390177, lng: 46.72451408991697 }
+        });
+
+        // URL of the car icon
+        const carIcon = {
+            url: '../../gps-navigation.png', // Replace with your car icon URL
+            scaledSize: new google.maps.Size(40, 40), // Scaled size of the icon
+            origin: new google.maps.Point(0, 0), // Origin of the image
+            anchor: new google.maps.Point(15, 15) // Anchor of the icon (center)
+        };
+
+        // Add markers for each car
+        cars.forEach(car => {
+          console.log("car", car);
+            const marker = new google.maps.Marker({
+                position: { lat: car.lat, lng: car.lng },
+                map: map,
+                title: car.name,
+                icon: carIcon
+            });
+
+            // Add an info window for each marker
+            const infoWindow = new google.maps.InfoWindow({
+                content: `<b>${car.name}</b><br>Latitude: ${car.lat}<br>Longitude: ${car.lng}`
+            });
+
+            marker.addListener('click', () => {
+                infoWindow.open(map, marker);
+            });
+        });
+    }
+</script>
+  @endpush
 @endsection
 
 

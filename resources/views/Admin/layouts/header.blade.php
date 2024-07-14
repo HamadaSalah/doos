@@ -30,6 +30,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet">
   <link href="{{ asset('dashboard/assets/css/soft-ui-dashboard.css')}}" rel="stylesheet" />
   <link href="{{ asset('dashboard/assets/css/style.css')}}" rel="stylesheet" />
+
 </head>
 
 <body class="g-sidenav-show rtl bg-gray-100">
