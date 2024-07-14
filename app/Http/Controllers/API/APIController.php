@@ -343,6 +343,23 @@ class APIController extends Controller
     }
     public function ReceiveTypes() {
         return response()->json(ReceiveType::all(), 200);
+    }
 
+    public function sendLocation(Request $request) 
+    {    
+        $request->validate([
+            'car_id' => 'required|exists:cars,id',
+            'lat' => ['required','regex:/^[-]?(([0-8]?[0-9])\.(\d+))|(90(\.0+)?)$/'],             
+            'long' => ['required','regex:/^[-]?((((1[0-7][0-9])|([0-9]?[0-9]))\.(\d+))|180(\.0+)?)$/']        
+        ]);
+
+        $car = Car::findOrFail($request->car_id);
+
+        $car->update([
+            'lat' => $request->lat,
+            'long' => $request->long,
+        ]);
+
+        return response()->json(['message' => 'location updated successfully']);
     }
 }

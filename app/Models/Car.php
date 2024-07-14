@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Car extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['type', 'model', 'year', 'price', 'assurance', 'number', 'licence_file', 'kilos', 'with_driver', 'status', 'company_id', 'branch_id'];
+    protected $fillable = ['type', 'model', 'year', 'price', 'assurance', 'number', 'licence_file', 'kilos', 'with_driver', 'status', 'company_id', 'branch_id', 'lat', 'long'];
     
     /*
      |--------------------------------------------------------------------------

@@ -21,6 +21,8 @@ Route::post('employee/auth/register', [AuthController::class, 'employeeRegister'
 Route::post('/matchOTP', [AuthController::class, 'matchOTP']);
 Route::post('employee/matchOTP', [AuthController::class, 'employeeMatchOTP']);
 
+Route::post('send-location', [APIController::class, 'sendLocation'])->middleware('auth.apikey');
+
 Route::group(['middleware' => ['auth:users']], function() {
 
     Route::get('/cars', [APIController::class, 'getCars']);
