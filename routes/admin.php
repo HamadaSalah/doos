@@ -25,7 +25,9 @@ Route::prefix('admin')->middleware('guest:admin')->name('admin.')->group(functio
     Route::post('/login', [LoginController::class, 'doLogin'])->name('login');
 });
 Route::prefix('admin')->middleware('auth:admin')->name('admin.')->group(function () {
+
     Route::get('/index', [LoginController::class, 'index'])->name('index');
+    Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
     Route::resource('branches', BranchesController::class);
     Route::post('/branches/delete', [BranchesController::class, 'delete'])->name('branches.delete');

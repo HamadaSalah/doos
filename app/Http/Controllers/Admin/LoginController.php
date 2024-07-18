@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Branch;
 use App\Models\Car;
+use App\Models\Rent;
+use App\Models\User;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
@@ -32,6 +35,8 @@ class LoginController extends Controller
     {
         $cars = Car::whereNotNull('lat')->whereNotNull('long')->get();
 
+        $users = User::count();
+        
         $mycars = $cars->map(function ($car) {
             return [
                 "name" => $car->type . " " . $car->model . " " . $car->number,
@@ -42,12 +47,16 @@ class LoginController extends Controller
         
         return view('Admin.index', [
             'title' => 'الرئيسية',
-            'cars' => $mycars
+            'cars' => $mycars,
+            'usersCount' => User::count(),
+            'branchesCount' => Branch::count(),
+            'carsCount' => Car::count(),
+            'rentsCount' => Rent::count(),
         ]);
     }
     public function logout(Request $request)
     {
         auth()->guard('admin')->logout();
-        return redirect()->route('Admin.login');
+        return redirect()->route('admin.login');
     }
 }

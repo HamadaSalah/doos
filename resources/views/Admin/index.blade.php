@@ -9,16 +9,16 @@
   
   </div>
 
-    <div class="row">
+    <div class="row mt-5">
       <div class="col-lg-3 col-sm-6 mb-lg-0 mb-4">
         <div class="card">
           <div class="card-body p-3">
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-capitalize font-weight-bold">أموال اليوم</p>
+                  <p class="text-sm mb-0 text-capitalize font-weight-bold">عدد الافرع</p>
                   <h5 class="font-weight-bolder mb-0">
-                    $53,000
+                    {{ $branchesCount }}
                     <span class="text-success text-sm font-weight-bolder">+55%</span>
                   </h5>
                 </div>
@@ -38,9 +38,9 @@
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-capitalize font-weight-bold">مستخدمو اليوم</p>
+                  <p class="text-sm mb-0 text-capitalize font-weight-bold">عدد المستخدمين</p>
                   <h5 class="font-weight-bolder mb-0">
-                    2,300
+                    {{ $usersCount }}
                     <span class="text-success text-sm font-weight-bolder">+33%</span>
                   </h5>
                 </div>
@@ -60,9 +60,9 @@
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-capitalize font-weight-bold">عملاء جدد</p>
+                  <p class="text-sm mb-0 text-capitalize font-weight-bold">عدد السيارات</p>
                   <h5 class="font-weight-bolder mb-0">
-                    +3,462
+                    {{ $carsCount }}
                     <span class="text-danger text-sm font-weight-bolder">-2%</span>
                   </h5>
                 </div>
@@ -82,9 +82,9 @@
             <div class="row">
               <div class="col-8">
                 <div class="numbers">
-                  <p class="text-sm mb-0 text-capitalize font-weight-bold">مبيعات</p>
+                  <p class="text-sm mb-0 text-capitalize font-weight-bold">عدد العقود</p>
                   <h5 class="font-weight-bolder mb-0">
-                    $103,430
+                    {{ $rentsCount }}
                     <span class="text-success text-sm font-weight-bolder">+5%</span>
                   </h5>
                 </div>
@@ -100,7 +100,7 @@
       </div>
     </div>
     
-    <div class="row mt-4">
+    {{-- <div class="row mt-4">
       <div class="col-lg-5 mb-lg-0 mb-4">
         <div class="card">
           <div class="card-body p-3">
@@ -233,9 +233,8 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> --}}
   </div>
-  @dump($cars)
   @push('scripts')
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBia4FwnhpyeHcNlWHM7WSjM4mlJAd3peQ&callback=initMap" async defer></script>
 

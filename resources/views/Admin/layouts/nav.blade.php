@@ -15,7 +15,7 @@
             </div>
             <ul class="navbar-nav me-auto ms-0 justify-content-end">
               <li class="nav-item d-flex align-items-center">
-                <a href="javascript:;" class="nav-link text-body font-weight-bold px-0">
+                <a href="{{ Route('admin.logout') }}" class="nav-link text-body font-weight-bold px-0">
                   <i class="fa fa-user me-sm-1"></i>
                   <span class="d-sm-inline d-none ms-3">تسجيل الخروج </span>
                 </a>
@@ -30,7 +30,7 @@
                 </a>
               </li>
               
-              <li class="nav-item dropdown ps-2 d-flex align-items-center">
+              {{-- <li class="nav-item dropdown ps-2 d-flex align-items-center">
                 <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                   <i class="fa fa-bell cursor-pointer"></i>
                 </a>  
@@ -102,7 +102,7 @@
                     </a>
                   </li>
                 </ul>
-              </li>
+              </li> --}}
             </ul>
           </div>
         </div>
