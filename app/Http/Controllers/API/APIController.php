@@ -225,19 +225,19 @@ class APIController extends Controller
             'date_from' => 'required',
             'date_to' => 'required',
             'time' => 'required',
-            'location' => 'required',
+            'location' => 'nullable',
             'car_id' => 'required',
-            "services" => 'required|exists:services,id|array',
+            // "services" => 'nullable|exists:services,id|array',
             "return_type_id" => 'required|exists:return_types,id'
         ]);
 
         $validatedData['user_id'] = auth()->user()->id;
 
-        unset($validatedData['services']);
-
         $rent = Rent::create($validatedData);
 
-        $rent->services()->attach($request->services);
+        if(isset($request->services) && count($request->services) > 0) {
+            $rent->services()->attach($request->services);
+        }
         
         return response()->json(['message' => 'Rent addedd succesfully', 'data' => $rent], 200);
 
@@ -361,5 +361,25 @@ class APIController extends Controller
         ]);
 
         return response()->json(['message' => 'location updated successfully']);
+    }
+
+    public function renewRent($id, Request $request)
+    {
+        $rent = Rent::findOrfail($id);
+
+        $request->validate([
+            'date_from' => 'required',
+            'date_to' => 'required',
+        ]);
+
+        $rent->update([
+            'date_from' => $request->date_from,
+            'date_to' => $request->date_to,
+            'created_at'=>\Carbon\Carbon::now(),
+            'updated_at'=>\Carbon\Carbon::now(),
+        ]);
+
+        return response()->json(['message' => 'Rent updated successfully']);
+
     }
 }

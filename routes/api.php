@@ -29,6 +29,7 @@ Route::group(['middleware' => ['auth:users']], function() {
     Route::post('/rent', [APIController::class, 'rent']);
     Route::get('/current-rent', [APIController::class, 'currentRent']);
     Route::get('/last-rent', [APIController::class, 'lastRent']);
+    Route::post('/renew-rent/{id}', [APIController::class, 'renewRent']);
     Route::get('/rent-types', [APIController::class, 'rentTypes']);
     Route::post('/update-profile', [APIController::class, 'updateProfile']);
     Route::get('/return-types', [APIController::class, 'returnType']);

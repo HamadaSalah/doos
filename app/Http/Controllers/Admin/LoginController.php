@@ -34,8 +34,6 @@ class LoginController extends Controller
     public function index()
     {
         $cars = Car::whereNotNull('lat')->whereNotNull('long')->get();
-
-        $users = User::count();
         
         $mycars = $cars->map(function ($car) {
             return [
@@ -54,6 +52,8 @@ class LoginController extends Controller
             'rentsCount' => Rent::count(),
         ]);
     }
+
+
     public function logout(Request $request)
     {
         auth()->guard('admin')->logout();
