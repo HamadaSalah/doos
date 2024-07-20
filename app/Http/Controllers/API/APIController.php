@@ -228,7 +228,7 @@ class APIController extends Controller
             'location' => 'nullable',
             'car_id' => 'required',
             // "services" => 'nullable|exists:services,id|array',
-            "return_type_id" => 'required|exists:return_types,id'
+            // "return_type_id" => 'required|exists:return_types,id'
         ]);
 
         $validatedData['user_id'] = auth()->user()->id;
