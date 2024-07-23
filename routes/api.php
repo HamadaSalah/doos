@@ -22,6 +22,11 @@ Route::post('/matchOTP', [AuthController::class, 'matchOTP']);
 Route::post('employee/matchOTP', [AuthController::class, 'employeeMatchOTP']);
 
 Route::post('send-location', [APIController::class, 'sendLocation'])->middleware('auth.apikey');
+Route::get('intro', [APIController::class, 'intro']);
+Route::get('/services', [APIController::class, 'services']);
+Route::get('about', [APIController::class, 'aboutData']);
+Route::get('categories', [APIController::class, 'listCategories']);
+Route::get('banners', [APIController::class, 'bannersData']);
 
 Route::group(['middleware' => ['auth:users']], function() {
 
@@ -33,23 +38,18 @@ Route::group(['middleware' => ['auth:users']], function() {
     Route::get('/rent-types', [APIController::class, 'rentTypes']);
     Route::post('/update-profile', [APIController::class, 'updateProfile']);
     Route::get('/return-types', [APIController::class, 'returnType']);
-    Route::get('/services', [APIController::class, 'services']);
     Route::post('/send-message', [APIController::class, 'sendMessage']);
     Route::get('/messages', [APIController::class, 'messages']);
     Route::get('/receive-types', [APIController::class, 'ReceiveTypes']);
 
-    Route::get('intro', [APIController::class, 'intro']);
     Route::get('employees', [APIController::class, 'listEmployees']);
-    Route::get('categories', [APIController::class, 'listCategories']);
     Route::get('slider', [APIController::class, 'listSliders']);
     Route::get('employees/{employee}', [APIController::class, 'employee']);
     Route::get('add-rate/{employee}', [APIController::class, 'addRate']);
     Route::post('add-appointment/{employee}', [APIController::class, 'AddAppointment']);
     Route::get('profile', [APIController::class, 'profileData']);
-    Route::get('banners', [APIController::class, 'bannersData']);
     Route::get('notification', [APIController::class, 'notificationData']);
     Route::get('transactions', [APIController::class, 'transactionsData']);
-    Route::get('about', [APIController::class, 'aboutData']);
 
 });
 
