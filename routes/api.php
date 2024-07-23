@@ -27,15 +27,15 @@ Route::get('/services', [APIController::class, 'services']);
 Route::get('about', [APIController::class, 'aboutData']);
 Route::get('categories', [APIController::class, 'listCategories']);
 Route::get('banners', [APIController::class, 'bannersData']);
+Route::get('/rent-types', [APIController::class, 'rentTypes']);
+Route::get('/cars', [APIController::class, 'getCars']);
 
 Route::group(['middleware' => ['auth:users']], function() {
 
-    Route::get('/cars', [APIController::class, 'getCars']);
     Route::post('/rent', [APIController::class, 'rent']);
     Route::get('/current-rent', [APIController::class, 'currentRent']);
     Route::get('/last-rent', [APIController::class, 'lastRent']);
     Route::post('/renew-rent/{id}', [APIController::class, 'renewRent']);
-    Route::get('/rent-types', [APIController::class, 'rentTypes']);
     Route::post('/update-profile', [APIController::class, 'updateProfile']);
     Route::get('/return-types', [APIController::class, 'returnType']);
     Route::post('/send-message', [APIController::class, 'sendMessage']);
