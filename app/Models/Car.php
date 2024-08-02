@@ -14,8 +14,10 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Car extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $fillable = ['type', 'model', 'year', 'price', 'assurance', 'number', 'licence_file', 'kilos', 'with_driver', 'status', 'company_id', 'branch_id', 'lat', 'long'];
+
+    protected $fillable = ['type', 'model', 'year', 'price', 'assurance', 'number', 'licence_file', 'kilos', 'with_driver', 'status', 'company_id', 'branch_id', 'lat', 'long', 'engine','bags','pass_count'];
     
+    protected $appends = ['favourite'];
     /*
      |--------------------------------------------------------------------------
      | Relations methods
@@ -70,6 +72,14 @@ class Car extends Model
         return 'تامين شامل';
         
     }
+    public function getFavouriteAttribute() 
+    {
+        if($this->favourite()->count() >= 1) {
+            return true;
+        }
+        return false;
+        
+    }
 
     public function getWithDriverAttribute($value) 
     {
@@ -97,5 +107,8 @@ class Car extends Model
         
     }
  
+    public function favourite() {
+        return $this->hasMany(Favourite::class);
+    }
 
 }

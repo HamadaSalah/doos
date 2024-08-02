@@ -32,6 +32,8 @@ Route::get('/cars', [APIController::class, 'getCars']);
 
 Route::group(['middleware' => ['auth:users']], function() {
 
+    Route::get('/favourite', [APIController::class, 'favourite']);
+    Route::post('/favourite', [APIController::class, 'saveFavourite']);
     Route::post('/rent', [APIController::class, 'rent']);
     Route::get('/current-rent', [APIController::class, 'currentRent']);
     Route::get('/last-rent', [APIController::class, 'lastRent']);

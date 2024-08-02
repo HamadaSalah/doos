@@ -12,6 +12,7 @@ use App\Models\Banner;
 use App\Models\Calender;
 use App\Models\Car;
 use App\Models\Employee;
+use App\Models\Favourite;
 use App\Models\Job;
 use App\Models\Message;
 use App\Models\Notification;
@@ -29,6 +30,7 @@ use App\Services\UploadService;
 use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Number;
@@ -37,6 +39,32 @@ use function PHPUnit\Framework\isEmpty;
 
 class APIController extends Controller
 {
+
+    public function favourite() {
+
+        $fav = Favourite::with('car')
+        ->where('user_id', Auth::id())
+        ->get()
+        ->pluck('car');    
+
+        return response()->json([
+            'favourites' => $fav
+        ]);
+    }
+
+    public function saveFavourite(Request $request) {
+
+        $favourite = auth()->user()->favourites()->where('car_id', $request->car_id)->first();
+
+        if ($favourite) {
+            // If the favourite exists, delete it
+            $favourite->delete();
+        } else {
+            // If it doesn't exist, create a new favourite
+            auth()->user()->favourites()->create(['car_id' => $request->car_id]);
+        }
+        
+    }
 
     public function intro(){
 
