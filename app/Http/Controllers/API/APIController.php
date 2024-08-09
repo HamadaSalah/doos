@@ -263,6 +263,8 @@ class APIController extends Controller
 
         $rent = Rent::create($validatedData);
 
+        $rent->load('car');
+
         if(isset($request->services) && count($request->services) > 0) {
             $rent->services()->attach($request->services);
         }
@@ -406,8 +408,8 @@ class APIController extends Controller
             'created_at'=>\Carbon\Carbon::now(),
             'updated_at'=>\Carbon\Carbon::now(),
         ]);
-
-        return response()->json(['message' => 'Rent updated successfully']);
+        $rent->load('car');
+        return response()->json(['message' => 'Rent updated successfully', 'rent' => $rent]);
 
     }
 }

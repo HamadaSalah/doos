@@ -18,12 +18,15 @@ use Illuminate\Support\Facades\Route;
  
 
 Route::get('/', function () {
-    return view('welcome');
+
+
+
+    // return view('welcome');
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('testt', function(){
 
     $response = Http::get('https://private-anon-75524369b4-carsapi1.apiary-mock.com/manufacturers');
